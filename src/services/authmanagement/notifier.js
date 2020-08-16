@@ -6,7 +6,7 @@ module.exports = function(app) {
   }
 
   function sendEmail(email) {
-    return app.service('mailer').create(email).then(function (result) {
+    return app.service('mailer').create(email).then(function(result) {
       console.log('Sent email', result)
     }).catch(err => {
       console.log('Error sending email', err)
@@ -21,10 +21,10 @@ module.exports = function(app) {
         case 'resendVerifySignup': //sending the user the verification email
           tokenLink = getLink('verify', user.verifyToken)
           email = {
-             from: process.env.FROM_EMAIL,
-             to: user.email,
-             subject: 'Verify Signup',
-             html: tokenLink
+            from: "support@snakenation.io",
+            to: user.email,
+            subject: 'Snake Nation | Verify Signup',
+            html: tokenLink
           }
           return sendEmail(email)
           break
@@ -32,28 +32,43 @@ module.exports = function(app) {
         case 'verifySignup': // confirming verification
           tokenLink = getLink('verify', user.verifyToken)
           email = {
-             from: process.env.FROM_EMAIL,
-             to: user.email,
-             subject: 'Confirm Signup',
-             html: 'Thanks for verifying your email'
+            from: "support@snakenation.io",
+            to: user.email,
+            subject: 'Snake Nation | Confirm Signup',
+            html: 'Thanks for verifying your email'
           }
           return sendEmail(email)
           break
 
         case 'sendResetPwd':
           tokenLink = getLink('reset', user.resetToken)
-          email = {}
+          email = {
+            from: "support@snakenation.io",
+            to: user.email,
+            subject: 'Snake Nation | Password Reset',
+            html: tokenLink
+          }
           return sendEmail(email)
           break
 
         case 'resetPwd':
           tokenLink = getLink('reset', user.resetToken)
-          email = {}
+          email = {
+            from: "support@snakenation.io",
+            to: user.email,
+            subject: 'Snake Nation | Password Reset',
+            html: 'Password Reset Successful'
+          }
           return sendEmail(email)
           break
 
         case 'passwordChange':
-          email = {}
+          email = {
+            from: "support@snakenation.io",
+            to: user.email,
+            subject: 'Confirm Signup',
+            html: 'Thanks for verifying your email'
+          }
           return sendEmail(email)
           break
 

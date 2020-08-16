@@ -8,11 +8,11 @@ module.exports = function (app) {
 
   // Initialize our service with any options it requires
   app.use('/mailer', Mailer(smtpTransport({
-    host: 'email-smtp.us-east-1.amazonaws.com',
+    host: 'smtp.sendgrid.net',
     secure: true,
     auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS
+      user: "apikey",
+      pass: "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"
     }
   })));
 
