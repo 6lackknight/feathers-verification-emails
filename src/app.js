@@ -12,7 +12,8 @@ const feathers = require('@feathersjs/feathers');
 const configuration = require('@feathersjs/configuration');
 const express = require('@feathersjs/express');
 
-
+const mongoose = require('./mongoose');
+const mongodb = require('./mongodb');
 
 const middleware = require('./middleware');
 const services = require('./services');
@@ -38,6 +39,9 @@ app.use('/', express.static(app.get('public')));
 // Set up Plugins and providers
 app.configure(express.rest());
 
+
+app.configure(mongoose);
+app.configure(mongodb);
 
 // Configure other middleware (see `middleware/index.js`)
 app.configure(middleware);

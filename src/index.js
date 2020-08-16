@@ -1,8 +1,5 @@
 /* eslint-disable no-console */
-const winston = require('winston');
-const logger = winston.createLogger({
-  transports: new winston.transports.Console()
-});
+const logger = require('./logger');
 const app = require('./app');
 const port = app.get('port');
 const server = app.listen(port);
@@ -12,5 +9,5 @@ process.on('unhandledRejection', (reason, p) =>
 );
 
 server.on('listening', () =>
-  logger.info('Feathers application started on http://%s:%d', app.get('host'), port)
+  logger.info('Snake Nation Content-API started on http://%s:%d', app.get('host'), port)
 );
